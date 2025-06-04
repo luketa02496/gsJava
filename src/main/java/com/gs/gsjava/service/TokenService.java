@@ -1,16 +1,13 @@
 package com.gs.gsjava.service;
 
 import com.gs.gsjava.model.Usuario;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Service;
-import io.jsonwebtoken.JwtParser;
-import java.security.Key;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Date;
 
 @Service
@@ -22,34 +19,33 @@ public class TokenService {
     @Value("${jwt.expiration}")
     private long expiration;
 
-    public String gerarToken(Usuario usuario) {
-        Key key = Keys.hmacShaKeyFor(secret.getBytes()); 
+    private Key getSigningKey() {
+        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
 
+    public String gerarToken(Usuario usuario) {
         return Jwts.builder()
                 .setSubject(usuario.getEmail())
                 .claim("nome", usuario.getNome())
                 .claim("tipo", usuario.getTipo())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(key, SignatureAlgorithm.HS512)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
-    public User validarToken(String token) {
-        try {
-            JwtParser parser = Jwts.parserBuilder()
-                    .setSigningKey(Keys.hmacShaKeyFor(secret.getBytes()))
-                    .build();
 
-            Claims claims = parser
-                    .parseClaimsJws(token)
-                    .getBody();
+    public Usuario validarToken(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
 
-            String email = claims.getSubject();
-            String tipo = claims.get("tipo", String.class);
-
-            return new User(email, "", java.util.List.of(() -> "ROLE_" + tipo.toUpperCase()));
-        } catch (Exception e) {
-            return null;
-        }
+        Usuario usuario = new Usuario();
+        usuario.setEmail(claims.getSubject());
+        usuario.setNome(claims.get("nome", String.class));
+        usuario.setTipo(claims.get("tipo", String.class));
+        return usuario;
     }
 }
+
