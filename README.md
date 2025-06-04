@@ -24,7 +24,15 @@ A solução **SAFE.Guard** é composta por três camadas:
 
 ---
 
-## 🚀 Como Executar o Projeto Localmente
+## Instrucões de uso
+Ao iniciar o swagger va ao endpoint /auth/login e coloque o seguinte conteudo: 
+{
+  "email": "admin@admin.com",
+  "senha": "admin"
+}
+voce ira receber um token como resposta
+salve esse token e no topo da pagina do swagger clique em "authorize" e coloque esse token la.
+apos isso voce podera usar todos os endpoints normalmente
 
 ### ✅ Pré-requisitos
 
