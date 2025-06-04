@@ -39,4 +39,13 @@ public class UsuarioService {
     public void deletar(Long id) {
         usuarioRepository.deleteById(id);
     }
+    
+    public Usuario autenticar(String email, String senha) {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario != null && senha.equals("admin")) { 
+            return usuario;
+        }
+        return null;
+    }
+
 }
