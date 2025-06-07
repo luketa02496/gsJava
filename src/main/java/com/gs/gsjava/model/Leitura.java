@@ -30,17 +30,11 @@ public class Leitura {
     @NotNull
     private LocalDateTime dataHora;
     
-    public Leitura () {}
-
-	public Leitura(Long idLeitura, Sensor sensor, @NotNull Double temperatura, @NotNull Double umidade,
-			@NotNull LocalDateTime dataHora) {
-		super();
-		this.idLeitura = idLeitura;
-		this.sensor = sensor;
-		this.temperatura = temperatura;
-		this.umidade = umidade;
-		this.dataHora = dataHora;
-	}
+    
+    
+    
+    
+    
 
 	public Long getIdLeitura() {
 		return idLeitura;

@@ -12,8 +12,7 @@ import java.util.Collections;
 @Entity
 @Table(name = "usuario")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Usuario implements UserDetails {
 
     @Id
@@ -41,10 +40,12 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "id_regiao")
     private Regiao regiao;
     
-    public Usuario () {}
-
     
-    public Usuario(Long idUsuario, @NotBlank @Size(max = 100) String nome,
+    public Usuario() {}
+        
+    
+
+	public Usuario(Long idUsuario, @NotBlank @Size(max = 100) String nome,
 			@Email @NotBlank @Size(max = 100) String email, @NotBlank String senha,
 			@NotNull @Pattern(regexp = "CIDADAO|AGENTE|ADMIN") String tipo, Regiao regiao) {
 		super();
@@ -55,8 +56,7 @@ public class Usuario implements UserDetails {
 		this.tipo = tipo;
 		this.regiao = regiao;
 	}
-    
-    
+
 
 	public Long getIdUsuario() {
 		return idUsuario;

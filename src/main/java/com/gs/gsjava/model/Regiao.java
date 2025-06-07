@@ -16,8 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "regiao")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Regiao {
 
     @Id
@@ -38,7 +37,7 @@ public class Regiao {
     private Double vulnerabilidade;
     
     public Regiao () {}
-
+    
 	public Regiao(Long idRegiao, @NotBlank String nome, @NotNull Double latitude, @NotNull Double longitude,
 			@DecimalMin("0.00") @DecimalMax("1.00") Double vulnerabilidade) {
 		super();

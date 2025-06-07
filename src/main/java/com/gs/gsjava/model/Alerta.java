@@ -36,19 +36,7 @@ public class Alerta {
     @Size(max = 200)
     private String mensagem;
     
-    public Alerta () {}
-
-	public Alerta(Long idAlerta, Regiao regiao, @NotNull @Pattern(regexp = "CALOR|FRIO") String tipo,
-			@NotNull @Pattern(regexp = "BAIXA|MEDIA|ALTA") String severidade, @NotNull LocalDateTime dataHora,
-			@NotBlank @Size(max = 200) String mensagem) {
-		super();
-		this.idAlerta = idAlerta;
-		this.regiao = regiao;
-		this.tipo = tipo;
-		this.severidade = severidade;
-		this.dataHora = dataHora;
-		this.mensagem = mensagem;
-	}
+    
 
 	public Long getIdAlerta() {
 		return idAlerta;

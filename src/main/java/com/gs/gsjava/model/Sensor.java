@@ -8,9 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "SENSOR")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Sensor {
 
     @Id
@@ -34,58 +32,72 @@ public class Sensor {
     @NotNull
     @Column(name = "data_instalacao")
     private LocalDate dataInstalacao;
-    
-    public Sensor () {}
 
-	public Sensor(Long idSensor, Regiao regiao, @NotBlank @Size(max = 50) String modelo,
-			@NotNull @Pattern(regexp = "ATIVO|INATIVO|MANUTENCAO") String status, @NotNull LocalDate dataInstalacao) {
-		super();
-		this.idSensor = idSensor;
-		this.regiao = regiao;
-		this.modelo = modelo;
-		this.status = status;
-		this.dataInstalacao = dataInstalacao;
-	}
+    
+    public Sensor() {}
+
+    
+    public Sensor(Long idSensor, Regiao regiao, @NotBlank @Size(max = 50) String modelo,
+                  @NotNull @Pattern(regexp = "ATIVO|INATIVO|MANUTENCAO") String status,
+                  @NotNull LocalDate dataInstalacao) {
+        this.idSensor = idSensor;
+        this.regiao = regiao;
+        this.modelo = modelo;
+        this.status = status;
+        this.dataInstalacao = dataInstalacao;
+    }
+
 
 	public Long getIdSensor() {
 		return idSensor;
 	}
 
+
 	public void setIdSensor(Long idSensor) {
 		this.idSensor = idSensor;
 	}
+
 
 	public Regiao getRegiao() {
 		return regiao;
 	}
 
+
 	public void setRegiao(Regiao regiao) {
 		this.regiao = regiao;
 	}
+
 
 	public String getModelo() {
 		return modelo;
 	}
 
+
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
+
 
 	public String getStatus() {
 		return status;
 	}
 
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 
 	public LocalDate getDataInstalacao() {
 		return dataInstalacao;
 	}
 
+
 	public void setDataInstalacao(LocalDate dataInstalacao) {
 		this.dataInstalacao = dataInstalacao;
 	}
+    
+    
     
     
 }

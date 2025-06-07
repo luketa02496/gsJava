@@ -6,8 +6,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class UsuarioDTO {
 
     private Long id;
@@ -25,19 +24,25 @@ public class UsuarioDTO {
 
     private Long idRegiao;
     
-    public UsuarioDTO() {
-    }
+    public UsuarioDTO() {}
+    
+
+    public UsuarioDTO(Long id, @NotBlank String nome, @Email @NotBlank String email,
+			@NotBlank @Pattern(regexp = "CIDADAO|AGENTE|ADMIN") String tipo, Long idRegiao) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.tipo = tipo;
+		this.idRegiao = idRegiao;
+	}
+
+	public UsuarioDTO(Usuario atualizado) {
+		
+	}
 
 
-    public UsuarioDTO(Usuario usuario) {
-        this.id = usuario.getIdUsuario();
-        this.nome = usuario.getNome();
-        this.email = usuario.getEmail();
-        this.tipo = usuario.getTipo();
-        this.idRegiao = usuario.getRegiao() != null ? usuario.getRegiao().getIdRegiao() : null;
-    }
-
-    public Usuario toEntity(Regiao regiao) {
+	public Usuario toEntity(Regiao regiao) {
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(this.id);
         usuario.setNome(this.nome);

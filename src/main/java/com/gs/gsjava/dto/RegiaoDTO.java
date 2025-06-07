@@ -5,8 +5,6 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class RegiaoDTO {
 
     private Long id;
@@ -24,19 +22,27 @@ public class RegiaoDTO {
     @DecimalMax("1.00")
     private Double vulnerabilidade;
     
-    public RegiaoDTO() {
-    }
+    public RegiaoDTO() {}
+    
+    
+    public RegiaoDTO(Long id, @NotBlank String nome, @NotNull Double latitude, @NotNull Double longitude,
+			@DecimalMin("0.00") @DecimalMax("1.00") Double vulnerabilidade) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.vulnerabilidade = vulnerabilidade;
+	}
 
 
-    public RegiaoDTO(Regiao regiao) {
-        this.id = regiao.getIdRegiao();
-        this.nome = regiao.getNome();
-        this.latitude = regiao.getLatitude();
-        this.longitude = regiao.getLongitude();
-        this.vulnerabilidade = regiao.getVulnerabilidade();
-    }
 
-    public Regiao toEntity() {
+	public RegiaoDTO(Regiao salvo) {
+		
+	}
+
+
+	public Regiao toEntity() {
         Regiao regiao = new Regiao();
         regiao.setIdRegiao(this.id);
         regiao.setNome(this.nome);
