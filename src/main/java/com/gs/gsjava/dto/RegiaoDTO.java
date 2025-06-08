@@ -37,9 +37,13 @@ public class RegiaoDTO {
 
 
 
-	public RegiaoDTO(Regiao salvo) {
-		
-	}
+    public RegiaoDTO(Regiao regiao) {
+        this.id = regiao.getIdRegiao();
+        this.nome = regiao.getNome();
+        this.latitude = regiao.getLatitude();
+        this.longitude = regiao.getLongitude();
+        this.vulnerabilidade = regiao.getVulnerabilidade();
+    }
 
 
 	public Regiao toEntity() {

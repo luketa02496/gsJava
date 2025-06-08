@@ -37,12 +37,17 @@ public class UsuarioDTO {
 		this.idRegiao = idRegiao;
 	}
 
-	public UsuarioDTO(Usuario atualizado) {
-		
-	}
+    public UsuarioDTO(Usuario usuario) {
+        this.id = usuario.getIdUsuario();
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
+        this.tipo = usuario.getTipo();
+        this.idRegiao = usuario.getRegiao() != null ? usuario.getRegiao().getIdRegiao() : null;  
+    }
 
 
-	public Usuario toEntity(Regiao regiao) {
+
+    public Usuario toEntity(Regiao regiao) {
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(this.id);
         usuario.setNome(this.nome);
@@ -51,6 +56,7 @@ public class UsuarioDTO {
         usuario.setRegiao(regiao);
         return usuario;
     }
+
 
 	public Long getId() {
 		return id;
