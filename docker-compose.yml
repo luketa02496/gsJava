@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  tempalertapi:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@//oracle-db:1521/XEPDB1
+      - SPRING_DATASOURCE_USERNAME=rm557957
+      - SPRING_DATASOURCE_PASSWORD=300306
+    depends_on:
+      - oracle-db
+    restart: always
+
+  oracle-db:
+    image: gvenzl/oracle-xe:21.3.0
+    environment:
+      - ORACLE_PASSWORD=300306
+      - APP_USER=rm557957
+      - APP_USER_PASSWORD=300306
+    ports:
+      - "1521:1521"
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+    restart: always
+
+volumes:
+  oracle_data:
