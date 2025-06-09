@@ -21,3 +21,10 @@ EXPOSE 8080
 
 # Comando para executar o aplicativo
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+
+# Criar usuário não-root
+RUN useradd -m appuser
+
+# Mudar para esse usuário
+USER appuser
